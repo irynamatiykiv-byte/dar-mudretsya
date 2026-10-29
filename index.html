@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Дар мудреця — Карта дня</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Багатошарова пастельна акварельна абстракція навколо картки */
+            background-color: #f7f3f0;
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(245, 228, 225, 0.9) 0%, transparent 45%),
+                radial-gradient(circle at 90% 85%, rgba(222, 235, 230, 0.9) 0%, transparent 45%),
+                radial-gradient(circle at 50% 30%, rgba(238, 226, 240, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(248, 240, 225, 0.8) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(230, 232, 242, 0.8) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #3b3a48;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card-container {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(160, 150, 155, 0.15);
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(235, 225, 220, 0.8);
+        }
+        h2 { 
+            color: #7c6a77; 
+            margin-bottom: 5px; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .subtitle {
+            color: #8c828d; 
+            font-size: 14px; 
+            margin-bottom: 25px;
+        }
+        .quote-box {
+            background: linear-gradient(120deg, #fcf9f6 0%, #f4f6f4 100%);
+            border-left: 4px solid #9bb1a8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #4a4e69;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            min-height: 70px;
+        }
+        button.action-btn {
+            background: linear-gradient(135deg, #9bb1a8 0%, #829a90 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(155, 177, 168, 0.3);
+            font-weight: 600;
+        }
+        button.action-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(155, 177, 168, 0.4);
+        }
+        .reflection-section {
+            text-align: left;
+            margin-top: 25px;
+            border-top: 1px solid #eee8e4;
+            padding-top: 20px;
+        }
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6d6875;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        textarea {
+            width: 100%;
+            height: 65px;
+            padding: 10px;
+            border: 1px solid #d4cdc5;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: vertical;
+            background-color: #fdfbfb;
+            color: #4a4e69;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #9bb1a8;
+            box-shadow: 0 0 5px rgba(155, 177, 168, 0.25);
+        }
+        .export-btn {
+            background-color: #829a90;
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+            margin-top: 18px;
+        }
+        .export-btn:hover { background-color: #6b8278; }
+
+        .saved-msg {
+            font-size: 13px;
+            color: #6b8278;
+            margin-top: 8px;
+            display: none;
+            font-weight: 600;
+        }
+        .footer-promo {
+            margin-top: 25px;
+            border-top: 1px dashed #d4cdc5;
+            padding-top: 15px;
+            font-size: 13px;
+            color: #8c828d;
+            line-height: 1.6;
+        }
+        .footer-promo a {
+            color: #829a90;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-promo a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <h2>Дар мудреця</h2>
+        <div class="subtitle">Авторська цифрова колода та простір для щоденних відкриттів</div>
+        
+        <div class="quote-box" id="quote">
+            Натисніть кнопку нижче, щоб відкрити свою карту дня...
+        </div>
+        
+        <button class="action-btn" onclick="getCard()">Отримати карту дня</button>
+
+        <div class="reflection-section">
+            <label for="q1">1. Як цей вислів перегукується з вашим життям? Яку підказку він дає?</label>
+            <textarea id="q1" placeholder="Ваші роздуми..."></textarea>
+
+            <label for="q2">2. До яких дій він спонукає?</label>
+            <textarea id="q2" placeholder="Ваші плани та кроки..."></textarea>
+
+            <label for="q3">3. Які зміни можуть відбутися, якщо ви скористаєтеся цією підказкою?</label>
+            <textarea id="q3" placeholder="Очікувані зміни та інсайти..."></textarea>
+
+            <button class="export-btn" onclick="exportToFile()">Зберегти</button>
+            <div id="savedNotice" class="saved-msg">Файл успішно збережено на комп'ютер! 📁</div>
+        </div>
+
+        <div class="footer-promo">
+            <a href="https://collection.pfp.lviv.ua/product/dar-mudretsya/" target="_blank">Більше про колоду «Дар мудреця»</a><br>
+            <a href="https://collection.pfp.lviv.ua" target="_blank">Авторська PSY-Колекція</a>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            "Близькість — це не про відстань. Це про щирість. До себе, до інших. По-справжньому поруч ми лише тоді, коли чесні у своїх почуттях.",
+            "Висловлюй свої потреби, бажання й сподівання. Не очікуй, що люди вгадають твої думки та задовольнять їх без слів.",
+            "Вичерпуй усі плюси з ситуацій, що відбуваються. І рухайся далі!",
+            "Відновлюй сили щодня! Піклуйся про себе лагідно (без провини й осуду). Твої потреби справді важливі. — Вінсент Ван Гог.",
+            "Все буде добре! Неодмінно! Твоє завдання – дочекатися цього моменту!",
+            "Все в твоїх руках! І це також.",
+            "Вчасно позбувайся того, що «не працює» і вже непотрібно. Що насправді цінне, важливе і має сенс для тебе?",
+            "Головне – вчасно зупинитися! Деколи паузи корисні.",
+            "Дива трапляються, але над цим потрібно добре попрацювати. — Уолт Дісней",
+            "Добре підготуйся і зроби «перший крок». Насправді не все так страшно!",
+            "Довіряй тому ледь відчутному поклику всередині, який шепоче: «Спробуй, це може спрацювати».",
+            "Дозволь собі бути собою — це дар для себе. Дозволь іншим бути собою — це дар для стосунків.",
+            "Дозволь собі прожити те, що є. І тоді воно відпустить.",
+            "Дозволь собі сумніватися, але не надто довго! Встанови межі часу, а потім дій рішуче.",
+            "Досягнення цілі розтягується настільки, скільки ви самі відводите на це часу. Визначені строки наближають бажане.",
+            "Емоційно заряджена мета має більше шансів бути досягнутою. «Підігрій» своє бажання втричі.",
+            "Живи так, щоби ні від чого не тікати, і ні за чим не гнатися. — Марк Аврелій",
+            "Зазирни у себе! Усередині тебе є джерело, яке живить завжди. Зміцнюй внутрішні опори щодня.",
+            "Запитуй себе щодня: «У що вкласти час сьогодні, щоб завтра мати його більше?»",
+            "Заплануй зустріч із радістю. Плекай її та практикуй у ритмі «повсякденно»."
+        ];
+
+        function getCard() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quoteEl = document.getElementById("quote");
+            quoteEl.style.opacity = 0;
+            setTimeout(() => {
+                quoteEl.innerText = quotes[randomIndex];
+                quoteEl.style.opacity = 1;
+            }, 150);
+        }
+
+        function exportToFile() {
+            const cardText = document.getElementById("quote").innerText;
+            const q1 = document.getElementById("q1").value;
+            const q2 = document.getElementById("q2").value;
+            const q3 = document.getElementById("q3").value;
+
+            const fileContent = `КАРТА ДНЯ: Дар мудреця\n==============================\n\nВитягнута карта / Вислів:\n${cardText}\n\n1. Як цей вислів перегукується з вашим життям? Яку підказку він дає?\n${q1}\n\n2. До яких дій він спонукає?\n${q2}\n\n3. Які зміни можуть відбутися, якщо ви скористаєтеся цією підказкою?\n${q3}\n`;
+
+            const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "dar-mudretsya-refleksiya.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            const notice = document.getElementById("savedNotice");
+            notice.style.display = "block";
+            setTimeout(() => {
+                notice.style.display = "none";
+            }, 3500);
+        }
+    </script>
+
+</body>
+</html>
